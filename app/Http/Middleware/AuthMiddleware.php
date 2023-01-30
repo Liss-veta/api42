@@ -21,9 +21,9 @@ class AuthMiddleware
     {
         if(DB::table('users')->where('token', 'null')->get()->first()){
             return response(json_encode([
-                'message' => "Guest exists",
+                'message' => "Гостевой доступ запрещен",
                 'code' => 403,
-            ]),403);
+            ], JSON_UNESCAPED_UNICODE),403);
         }
         return $next($request);
 
