@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Hash;
 
 class LogoutController extends Controller
 {
-    public function logout(Request $request){
-
+    public function logout(Request $request)
+    {
         return DB::table('users')->where('token', '!=', null)->update([
             'token'=> 'null'
         ]);

@@ -23,10 +23,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware(['admin'])->group(function() {
+    Route::post('/product', [PostController::class, 'create']);
+    Route::patch('/product/{id}', [PostController::class, 'update']);
+    Route::delete('/product/{id}', [PostController::class, 'delete']);
+});
+
+// Route::group(['middleware' => 'admin'], function(){
+//     Route::post('/product', [PostController::class, 'create']);
+//     Route::patch('/product/{id}', [PostController::class, 'update']);
+//     Route::delete('/product/{id}', [PostController::class, 'delete']);
+// });
+
+
+
 Route::group(['middleware' => 'user'], function(){
-    Route::get('/posts', [PostController::class, 'show']);
+    Route::post('/logout', [LogoutController::class, 'logout']);
 });
 
 Route::post('/auth', [AuthController::class, 'auth']);
 Route::post('/register', [RegisterController::class, 'create']);
-Route::post('/logout', [LogoutController::class, 'logout']);
+Route::get('/catalog', [PostController::class, 'show']);
+

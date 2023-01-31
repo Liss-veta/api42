@@ -5,10 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
-class AuthMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,16 +17,14 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = DB::table('users')->where('token', '!=', 'null')->first();
-        if(!$user){
-            return response(json_encode([
-                'message' => "Гостевой доступ запрещен",
-                'code' => 403,
-            ], JSON_UNESCAPED_UNICODE),403);
-        }
-        else{
+        if(User::where('role', 'admin')->get()->first()){
             return $next($request);
-        }
-
+       }
+       else{
+           return response(json_encode([
+               'message' => "Доступ для вышей группы запрещен",
+               'code' => 403,
+           ], JSON_UNESCAPED_UNICODE),403);
+       }
     }
 }

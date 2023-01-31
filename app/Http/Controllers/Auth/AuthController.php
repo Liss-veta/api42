@@ -17,16 +17,17 @@ class AuthController extends Controller
             DB::table('users')->where('email', $request->input('email'))->update([
                 'token'=>Str::random(40)
             ]);
+            $user = DB::table('users')->where('email', $request->input('email'))->get()->first();
             return response()->json([
-            'message'=>'ok',
-            'code'=>'200'
+                'message'=>'ok',
+                'user_token' => $user->token,
         ]);
         }
         else{
             return response(json_encode([
-                'message '=> 'lox',
-                'code' => 403
-            ]), 403);
+                'message '=> 'Неудачный вход',
+                'code' => 401
+            ], JSON_UNESCAPED_UNICODE), 401);
         }
 
     }
