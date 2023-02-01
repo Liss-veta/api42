@@ -19,7 +19,7 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = DB::table('users')->where('token', '!=', 'null')->first();
+        $user = User::whereNotNull('token')->first();
         if(!$user){
             return response(json_encode([
                 'message' => "Гостевой доступ запрещен",

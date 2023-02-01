@@ -13,7 +13,7 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-        return DB::table('users')->where('token', '!=', null)->update([
+        return User::whereNotNull('token')->update([
             'token'=> 'null'
         ]);
     }

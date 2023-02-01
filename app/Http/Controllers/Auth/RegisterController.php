@@ -26,18 +26,6 @@ class RegisterController extends Controller
             if(!str_contains($request->input('email'),'@')){
                 if(!$request->input('name'))
                 {
-
-                    //  DB::table('users')->insert([
-                    // 'email'=>$request->input('email'),
-                    // 'name'=>$request->input('name'),
-                    // 'password'=>Hash::make($request->input('password')),
-                    // 'role'=>'user',
-                    // 'token'=> 'null',
-                    // ]);
-                    // DB::table('users')->where('email', $request->input('email'))->update([
-                    //     'token'=>Str::random(40)
-                    // ]);
-                    // $user = DB::table('users')->where('email', $request->input('email'))->get()->first();
                     return response(json_encode([
                         'message' => "Несоответсвие требованиям",
                         'code' => 422,

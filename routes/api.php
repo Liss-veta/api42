@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::group(['middleware' => 'user'], function(){
     Route::post('/cart/{product_id}', [CartController::class, 'add']);
     Route::get('/cart', [CartController::class, 'show']);
     Route::delete('/cart/{id}', [CartController::class, 'delete']);
+    Route::post('/order', [OrderController::class, 'create']);
+    Route::get('/order', [OrderController::class, 'show']);
 });
 
 Route::post('/auth', [AuthController::class, 'auth']);
