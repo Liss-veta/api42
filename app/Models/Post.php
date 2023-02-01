@@ -14,4 +14,8 @@ class Post extends Model
         'body',
         'price',
     ];
+
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }

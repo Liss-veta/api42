@@ -11,6 +11,7 @@ class PostController extends Controller
     public function show(){
         return response()->json(Post::all());
     }
+    
     public function create(Request $request){
         Post::insert([
             'title'=>$request->input('title'),
@@ -23,6 +24,7 @@ class PostController extends Controller
             'id' => $product->id,
         ], JSON_UNESCAPED_UNICODE);
     }
+
     public function update(Request $request, $id){
         Post::where('id', $id)->update([
             'title'=>$request->input('title'),
